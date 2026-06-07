@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FÆBRIQ — Brand Logos</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:        #0f0e0c;   /* near-black / digital void */
+    --paper:      #f5f5f5;   /* off-white */
+    --slate:      #2f3e46;   /* secondary neutral */
+    --line:       rgba(245,245,245,0.14);
+    --line-soft:  rgba(245,245,245,0.08);
+    --muted:      rgba(245,245,245,0.46);
+
+    --circuit-red:    #ef4444;
+    --circuit-yellow: #f5b400;
+    --circuit-green:  #22c55e;
+    --circuit-blue:   #3b82f6;
+    --circuit-purple: #a855f7;
+
+    --serif: "Instrument Serif", Georgia, serif;
+    --mono:  "IBM Plex Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
+  }
+
+  *{ box-sizing:border-box; }
+
+  body{
+    margin:0;
+    background:var(--ink);
+    color:var(--paper);
+    font-family:var(--mono);
+    -webkit-font-smoothing:antialiased;
+  }
+
+  .card{
+    max-width:1040px;
+    margin:0 auto;
+    padding:64px 32px 88px;
+  }
+
+  /* ---------- Header ---------- */
+  .card__eyebrow{
+    font-size:11px;
+    letter-spacing:0.28em;
+    text-transform:uppercase;
+    color:var(--muted);
+    margin:0 0 14px;
+  }
+  .card__title{
+    font-family:var(--serif);
+    font-weight:400;
+    font-size:clamp(34px, 5vw, 52px);
+    line-height:1.05;
+    margin:0 0 16px;
+    letter-spacing:0.01em;
+  }
+  .card__lede{
+    max-width:640px;
+    font-size:14px;
+    line-height:1.7;
+    color:rgba(245,245,245,0.66);
+    margin:0;
+  }
+  .card__lede strong{ color:var(--paper); font-weight:500; }
+
+  /* ---------- Circuit rule ---------- */
+  .circuit-rule{
+    display:block;
+    width:100%;
+    height:2px;
+    margin:40px 0 48px;
+    border:0;
+    border-radius:2px;
+    background:linear-gradient(
+      90deg,
+      var(--circuit-red) 0%,
+      var(--circuit-yellow) 25%,
+      var(--circuit-green) 50%,
+      var(--circuit-blue) 75%,
+      var(--circuit-purple) 100%
+    );
+    opacity:0.7;
+  }
+
+  /* ---------- Lockup grid ---------- */
+  .lockups{
+    display:grid;
+    grid-template-columns:1.6fr 1fr 0.85fr;
+    gap:0;
+    border:1px solid var(--line);
+    border-radius:2px;
+    overflow:hidden;
+  }
+  @media (max-width:720px){
+    .lockups{ grid-template-columns:1fr; }
+  }
+
+  .lockup{
+    display:flex;
+    flex-direction:column;
+    border-left:1px solid var(--line);
+  }
+  .lockup:first-child{ border-left:0; }
+  @media (max-width:720px){
+    .lockup{ border-left:0; border-top:1px solid var(--line); }
+    .lockup:first-child{ border-top:0; }
+  }
+
+  .lockup__stage{
+    position:relative;
+    flex:1;
+    min-height:240px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    padding:32px 24px;
+    overflow:hidden;
+  }
+
+  .lockup__caption{
+    border-top:1px solid var(--line);
+    padding:14px 20px;
+    font-size:12px;
+    letter-spacing:0.04em;
+    color:var(--muted);
+    line-height:1.5;
+  }
+  .lockup__caption b{
+    color:var(--paper);
+    font-weight:500;
+  }
+
+  /* ---------- Wordmark · primary ---------- */
+  .lockup--primary .lockup__stage{ flex-direction:column; gap:18px; }
+
+  .wordmark{
+    position:relative;
+    display:inline-block;
+    font-family:var(--serif);
+    font-size:clamp(40px, 6vw, 64px);
+    letter-spacing:0.06em;
+    line-height:1;
+    color:var(--paper);
+  }
+  .wordmark__trace{
+    position:absolute;
+    left:-6%;
+    right:-6%;
+    top:52%;
+    height:18px;
+    transform:translateY(-50%);
+    pointer-events:none;
+  }
+  .wordmark__trace svg{ display:block; width:100%; height:100%; }
+  .wordmark__trace line{
+    stroke:url(#trace-gradient);
+    stroke-width:1;
+    opacity:0.8;
+  }
+  .wordmark__trace circle{ opacity:0.95; }
+
+  .tagline{
+    font-family:var(--mono);
+    font-size:12px;
+    letter-spacing:0.42em;
+    text-transform:uppercase;
+    color:rgba(245,245,245,0.6);
+    margin:0;
+  }
+
+  /* ---------- Stacked ---------- */
+  .lockup--stacked .lockup__stage{ flex-direction:column; gap:8px; }
+  .wordmark--stacked{ font-size:clamp(28px, 4.4vw, 40px); }
+  .wordmark--stacked .wordmark__trace{ height:12px; }
+  .tagline--stacked{ letter-spacing:0.36em; font-size:11px; }
+
+  /* ---------- Monogram ---------- */
+  .monogram{
+    font-family:var(--serif);
+    font-size:clamp(64px, 9vw, 96px);
+    line-height:1;
+    color:var(--paper);
+  }
+
+  /* ---------- Guidance ---------- */
+  .guidance{
+    margin-top:56px;
+    display:grid;
+    grid-template-columns:repeat(3, 1fr);
+    gap:1px;
+    background:var(--line);
+    border:1px solid var(--line);
+  }
+  @media (max-width:720px){
+    .guidance{ grid-template-columns:1fr; }
+  }
+  .guidance__cell{
+    background:var(--ink);
+    padding:24px 22px;
+  }
+  .guidance__label{
+    font-size:11px;
+    letter-spacing:0.22em;
+    text-transform:uppercase;
+    color:var(--muted);
+    margin:0 0 10px;
+  }
+  .guidance__body{
+    margin:0;
+    font-size:13px;
+    line-height:1.7;
+    color:rgba(245,245,245,0.78);
+  }
+  .guidance__body code{
+    font-family:var(--mono);
+    font-size:12px;
+    color:var(--paper);
+    background:rgba(245,245,245,0.08);
+    padding:1px 6px;
+    border-radius:3px;
+  }
+
+  /* ---------- Do / Don't ---------- */
+  .verdicts{
+    margin-top:1px;
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:1px;
+    background:var(--line);
+  }
+  @media (max-width:720px){
+    .verdicts{ grid-template-columns:1fr; }
+  }
+  .verdict{
+    background:var(--ink);
+    padding:24px 22px;
+    border:1px solid var(--line);
+    border-top:0;
+  }
+  .verdict__tag{
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+    font-size:11px;
+    letter-spacing:0.22em;
+    text-transform:uppercase;
+    margin:0 0 12px;
+  }
+  .verdict__tag::before{
+    content:"";
+    width:7px;
+    height:7px;
+    border-radius:50%;
+  }
+  .verdict--do .verdict__tag{ color:var(--circuit-green); }
+  .verdict--do .verdict__tag::before{ background:var(--circuit-green); }
+  .verdict--dont .verdict__tag{ color:var(--circuit-red); }
+  .verdict--dont .verdict__tag::before{ background:var(--circuit-red); }
+
+  .verdict ul{
+    margin:0;
+    padding:0 0 0 18px;
+    font-size:13px;
+    line-height:1.75;
+    color:rgba(245,245,245,0.78);
+  }
+  .verdict li{ margin:0 0 6px; }
+  .verdict li:last-child{ margin-bottom:0; }
+</style>
+</head>
+<body>
+  <article class="card">
+
+    <p class="card__eyebrow">Guidelines / Identity</p>
+    <h1 class="card__title">Brand logos</h1>
+    <p class="card__lede">
+      The FÆBRIQ mark exists in three sanctioned lockups — <strong>wordmark</strong>,
+      <strong>stacked</strong>, and <strong>Æ monogram</strong> — each set in
+      Instrument&nbsp;Serif on the near-black ground <code>#0f0e0c</code>. Every
+      lockup carries the <strong>pride circuit trace</strong>, a thin five-node
+      gradient line (red → yellow → green → blue → purple) that threads through
+      the mark as the brand's unifying signal.
+    </p>
+
+    <hr class="circuit-rule">
+
+    <div class="lockups">
+
+      <!-- Wordmark · Primary -->
+      <figure class="lockup lockup--primary">
+        <div class="lockup__stage">
+          <span class="wordmark">
+            FÆBRIQ
+            <span class="wordmark__trace" aria-hidden="true">
+              <svg viewBox="0 0 200 18" preserveAspectRatio="none">
+                <defs>
+                  <linearGradient id="trace-gradient" x1="0" y1="0" x2="1" y2="0">
+                    <stop offset="0%"   stop-color="var(--circuit-red)"/>
+                    <stop offset="25%"  stop-color="var(--circuit-yellow)"/>
+                    <stop offset="50%"  stop-color="var(--circuit-green)"/>
+                    <stop offset="75%"  stop-color="var(--circuit-blue)"/>
+                    <stop offset="100%" stop-color="var(--circuit-purple)"/>
+                  </linearGradient>
+                </defs>
+                <line x1="4" y1="9" x2="196" y2="9"/>
+                <circle cx="10"  cy="9" r="3" fill="var(--circuit-red)"/>
+                <circle cx="58"  cy="9" r="3" fill="var(--circuit-yellow)"/>
+                <circle cx="106" cy="9" r="3" fill="var(--circuit-green)"/>
+                <circle cx="154" cy="9" r="3" fill="var(--circuit-blue)"/>
+                <circle cx="192" cy="9" r="3" fill="var(--circuit-purple)"/>
+              </svg>
+            </span>
+          </span>
+          <p class="tagline">Code it, serve it.</p>
+        </div>
+        <figcaption class="lockup__caption"><b>Wordmark</b> · primary</figcaption>
+      </figure>
+
+      <!-- Stacked -->
+      <figure class="lockup lockup--stacked">
+        <div class="lockup__stage">
+          <span class="wordmark wordmark--stacked">
+            FÆBRIQ
+            <span class="wordmark__trace" aria-hidden="true">
+              <svg viewBox="0 0 200 18" preserveAspectRatio="none">
+                <line x1="4" y1="9" x2="196" y2="9" stroke="url(#trace-gradient)" stroke-width="1" opacity="0.8"/>
+                <circle cx="14"  cy="9" r="2.6" fill="var(--circuit-red)"/>
+                <circle cx="63"  cy="9" r="2.6" fill="var(--circuit-yellow)"/>
+                <circle cx="106" cy="9" r="2.6" fill="var(--circuit-green)"/>
+                <circle cx="148" cy="9" r="2.6" fill="var(--circuit-blue)"/>
+                <circle cx="190" cy="9" r="2.6" fill="var(--circuit-purple)"/>
+              </svg>
+            </span>
+          </span>
+          <p class="tagline tagline--stacked">Serve it.</p>
+        </div>
+        <figcaption class="lockup__caption"><b>Stacked</b></figcaption>
+      </figure>
+
+      <!-- Æ Monogram -->
+      <figure class="lockup lockup--monogram">
+        <div class="lockup__stage">
+          <span class="monogram">Æ</span>
+        </div>
+        <figcaption class="lockup__caption"><b>Æ</b><br>monogram</figcaption>
+      </figure>
+
+    </div>
+
+    <!-- Usage guidance -->
+    <div class="guidance">
+      <div class="guidance__cell">
+        <p class="guidance__label">Clear space</p>
+        <p class="guidance__body">
+          Reserve a minimum margin equal to the cap-height of the
+          <code>Æ</code> on every side of any lockup. Nothing — type,
+          imagery, or the circuit trace of another mark — may enter that zone.
+        </p>
+      </div>
+      <div class="guidance__cell">
+        <p class="guidance__label">Minimum size</p>
+        <p class="guidance__body">
+          Wordmark and stacked lockups should not render below
+          <code>120px</code> wide; the Æ monogram is the only lockup
+          approved for favicons and sub-<code>32px</code> placements.
+        </p>
+      </div>
+      <div class="guidance__cell">
+        <p class="guidance__label">Ground &amp; contrast</p>
+        <p class="guidance__body">
+          Default to off-white <code>#f5f5f5</code> type on the near-black
+          ground <code>#0f0e0c</code>. On light or photographic grounds,
+          flip to slate <code>#2f3e46</code> and keep the circuit trace at
+          60–80% opacity so it never competes with the wordmark.
+        </p>
+      </div>
+    </div>
+
+    <div class="verdicts">
+      <div class="verdict verdict--do">
+        <p class="verdict__tag">Do</p>
+        <ul>
+          <li>Let the circuit trace run <em>through</em> the wordmark as a single unbroken line — it is the mark's signature, not a decoration applied after the fact.</li>
+          <li>Pair the wordmark lockup with "Code it, serve it." and the stacked lockup with the shorter "Serve it." cue.</li>
+          <li>Use the Æ monogram alone wherever space is tight: favicons, stickers, corner marks on accessories.</li>
+        </ul>
+      </div>
+      <div class="verdict verdict--dont">
+        <p class="verdict__tag">Don't</p>
+        <ul>
+          <li>Recolor the circuit trace to a single brand color, stretch it, or break it into segments — the five-node gradient is fixed.</li>
+          <li>Add drop shadows, outlines, or gradients to the Instrument&nbsp;Serif letterforms; let the high-contrast ground do the work.</li>
+          <li>Crowd the lockup with secondary lockups, taglines, or imagery inside its clear-space margin.</li>
+        </ul>
+      </div>
+    </div>
+
+  </article>
+</body>
+</html>
