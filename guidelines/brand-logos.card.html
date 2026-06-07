@@ -13,14 +13,14 @@
     --paper:      #f5f5f5;   /* off-white */
     --slate:      #2f3e46;   /* secondary neutral */
     --line:       rgba(245,245,245,0.14);
-    --line-soft:  rgba(245,245,245,0.08);
     --muted:      rgba(245,245,245,0.46);
 
-    --circuit-red:    #ef4444;
-    --circuit-yellow: #f5b400;
-    --circuit-green:  #22c55e;
-    --circuit-blue:   #3b82f6;
-    --circuit-purple: #a855f7;
+    --circuit-1: #E05A4E; /* coral  */
+    --circuit-2: #E08C30; /* amber  */
+    --circuit-3: #C8B830; /* yellow */
+    --circuit-4: #4CAF7A; /* green  */
+    --circuit-5: #4A9EFF; /* blue   */
+    --circuit-6: #9B6FD4; /* purple */
 
     --serif: "Instrument Serif", Georgia, serif;
     --mono:  "IBM Plex Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
@@ -35,6 +35,9 @@
     font-family:var(--mono);
     -webkit-font-smoothing:antialiased;
   }
+
+  /* Shared gradient definition for every circuit graphic on the page */
+  .gradients{ position:absolute; width:0; height:0; overflow:hidden; }
 
   .card{
     max-width:1040px;
@@ -67,24 +70,12 @@
   }
   .card__lede strong{ color:var(--paper); font-weight:500; }
 
-  /* ---------- Circuit rule ---------- */
+  /* ---------- Circuit rule (page divider, full canonical trace) ---------- */
   .circuit-rule{
-    display:block;
-    width:100%;
-    height:2px;
     margin:40px 0 48px;
-    border:0;
-    border-radius:2px;
-    background:linear-gradient(
-      90deg,
-      var(--circuit-red) 0%,
-      var(--circuit-yellow) 25%,
-      var(--circuit-green) 50%,
-      var(--circuit-blue) 75%,
-      var(--circuit-purple) 100%
-    );
-    opacity:0.7;
+    line-height:0;
   }
+  .circuit-rule svg{ display:block; width:100%; height:auto; opacity:0.8; }
 
   /* ---------- Lockup grid ---------- */
   .lockups{
@@ -115,6 +106,7 @@
     flex:1;
     min-height:240px;
     display:flex;
+    flex-direction:column;
     align-items:center;
     justify-content:center;
     padding:32px 24px;
@@ -134,58 +126,46 @@
     font-weight:500;
   }
 
-  /* ---------- Wordmark · primary ---------- */
-  .lockup--primary .lockup__stage{ flex-direction:column; gap:0; }
-
-  .wordmark{
-    position:relative;
-    display:inline-block;
+  /* ---------- Mark anatomy: wordmark, then circuit underneath, then tagline ---------- */
+  .mark{
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+  }
+  .mark__word{
     font-family:var(--serif);
-    font-size:clamp(40px, 6vw, 64px);
+    font-weight:400;
     letter-spacing:0.06em;
     line-height:1;
     color:var(--paper);
-    margin-bottom:28px;
   }
-  .wordmark__trace{
-    position:absolute;
-    left:-6%;
-    right:-6%;
-    top:100%;
+  .mark__circuit{
+    display:block;
+    width:100%;
+    height:auto;
     margin-top:14px;
-    height:14px;
-    pointer-events:none;
   }
-  .wordmark__trace svg{ display:block; width:100%; height:100%; }
-  .wordmark__trace line{
-    stroke:url(#trace-gradient);
-    stroke-width:1;
-    opacity:0.8;
-  }
-  .wordmark__trace circle{ opacity:0.95; }
-
-  .tagline{
+  .mark__tagline{
     font-family:var(--mono);
-    font-size:12px;
-    letter-spacing:0.42em;
     text-transform:uppercase;
     color:rgba(245,245,245,0.6);
-    margin:0;
+    margin:14px 0 0;
+    text-align:center;
   }
 
-  /* ---------- Stacked ---------- */
-  .lockup--stacked .lockup__stage{ flex-direction:column; gap:0; }
-  .wordmark--stacked{ font-size:clamp(28px, 4.4vw, 40px); margin-bottom:20px; }
-  .wordmark--stacked .wordmark__trace{ height:10px; margin-top:10px; }
-  .tagline--stacked{ letter-spacing:0.36em; font-size:11px; }
+  /* Wordmark · primary */
+  .mark--primary{ width:100%; max-width:300px; }
+  .mark--primary .mark__word{ font-size:clamp(38px, 6vw, 60px); }
+  .mark--primary .mark__tagline{ font-size:12px; letter-spacing:0.4em; }
 
-  /* ---------- Monogram ---------- */
-  .monogram{
-    font-family:var(--serif);
-    font-size:clamp(64px, 9vw, 96px);
-    line-height:1;
-    color:var(--paper);
-  }
+  /* Stacked */
+  .mark--stacked{ width:100%; max-width:200px; }
+  .mark--stacked .mark__word{ font-size:clamp(24px, 4vw, 32px); }
+  .mark--stacked .mark__tagline{ font-size:10px; letter-spacing:0.32em; }
+
+  /* Æ monogram */
+  .mark--monogram{ width:100%; max-width:140px; }
+  .mark--monogram .mark__word{ font-size:clamp(48px, 7vw, 64px); letter-spacing:0.02em; }
 
   /* ---------- Guidance ---------- */
   .guidance{
@@ -257,10 +237,10 @@
     height:7px;
     border-radius:50%;
   }
-  .verdict--do .verdict__tag{ color:var(--circuit-green); }
-  .verdict--do .verdict__tag::before{ background:var(--circuit-green); }
-  .verdict--dont .verdict__tag{ color:var(--circuit-red); }
-  .verdict--dont .verdict__tag::before{ background:var(--circuit-red); }
+  .verdict--do .verdict__tag{ color:var(--circuit-4); }
+  .verdict--do .verdict__tag::before{ background:var(--circuit-4); }
+  .verdict--dont .verdict__tag{ color:var(--circuit-1); }
+  .verdict--dont .verdict__tag::before{ background:var(--circuit-1); }
 
   .verdict ul{
     margin:0;
@@ -274,6 +254,21 @@
 </style>
 </head>
 <body>
+
+  <!-- Shared gradient — every circuit graphic on the page references this single definition -->
+  <svg class="gradients" aria-hidden="true">
+    <defs>
+      <linearGradient id="faeCircuitGrad" gradientUnits="userSpaceOnUse" x1="120" y1="270" x2="1712" y2="270">
+        <stop offset="0"    stop-color="var(--circuit-1)"/>
+        <stop offset="0.2"  stop-color="var(--circuit-2)"/>
+        <stop offset="0.4"  stop-color="var(--circuit-3)"/>
+        <stop offset="0.58" stop-color="var(--circuit-4)"/>
+        <stop offset="0.78" stop-color="var(--circuit-5)"/>
+        <stop offset="1"    stop-color="var(--circuit-6)"/>
+      </linearGradient>
+    </defs>
+  </svg>
+
   <article class="card">
 
     <p class="card__eyebrow">Guidelines / Identity</p>
@@ -282,70 +277,133 @@
       The FÆBRIQ mark exists in three sanctioned lockups — <strong>wordmark</strong>,
       <strong>stacked</strong>, and <strong>Æ monogram</strong> — each set in
       Instrument&nbsp;Serif on the near-black ground <code>#0f0e0c</code>. Every
-      lockup carries the <strong>pride circuit trace</strong>, a thin five-node
-      gradient line (red → yellow → green → blue → purple) that runs as an
-      underline beneath the mark — the brand's unifying signal.
+      lockup sits directly above the <strong>canonical circuit</strong>: a single,
+      never-redrawn rainbow trace (coral → amber → yellow → green → blue → purple)
+      that runs <em>underneath</em> the wordmark as the brand's unifying signal.
     </p>
 
-    <hr class="circuit-rule">
+    <!-- Full canonical circuit, shown edge to edge as the section divider -->
+    <div class="circuit-rule" aria-hidden="true">
+      <svg viewBox="0 0 1832 540" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="FÆBRIQ rainbow circuit trace">
+        <g fill="none" stroke="url(#faeCircuitGrad)" stroke-width="8" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M140 270 H1692"/>
+          <path d="M205 160 L300 270"/>
+          <path d="M205 380 L300 270"/>
+          <path d="M905 270 V300 H940 V392"/>
+          <path d="M1010 270 V320 H1228"/>
+          <path d="M905 252 H1170" stroke-width="5" opacity="0.85"/>
+          <path d="M1627 160 L1532 270"/>
+          <path d="M1627 380 L1532 270"/>
+        </g>
+        <circle cx="140" cy="270" r="21" fill="url(#faeCircuitGrad)"/>
+        <circle cx="1692" cy="270" r="21" fill="url(#faeCircuitGrad)"/>
+        <g fill="#0d0d0d" stroke="url(#faeCircuitGrad)" stroke-width="6">
+          <circle cx="190" cy="150" r="13"/>
+          <circle cx="190" cy="390" r="13"/>
+          <circle cx="940" cy="408" r="13"/>
+          <circle cx="1246" cy="320" r="12"/>
+          <circle cx="1642" cy="150" r="13"/>
+          <circle cx="1642" cy="390" r="13"/>
+        </g>
+      </svg>
+    </div>
 
     <div class="lockups">
 
-      <!-- Wordmark · Primary -->
-      <figure class="lockup lockup--primary">
+      <!-- Wordmark · primary -->
+      <figure class="lockup">
         <div class="lockup__stage">
-          <span class="wordmark">
-            FÆBRIQ
-            <span class="wordmark__trace" aria-hidden="true">
-              <svg viewBox="0 0 200 18" preserveAspectRatio="none">
-                <defs>
-                  <linearGradient id="trace-gradient" x1="0" y1="0" x2="1" y2="0">
-                    <stop offset="0%"   stop-color="var(--circuit-red)"/>
-                    <stop offset="25%"  stop-color="var(--circuit-yellow)"/>
-                    <stop offset="50%"  stop-color="var(--circuit-green)"/>
-                    <stop offset="75%"  stop-color="var(--circuit-blue)"/>
-                    <stop offset="100%" stop-color="var(--circuit-purple)"/>
-                  </linearGradient>
-                </defs>
-                <line x1="4" y1="9" x2="196" y2="9"/>
-                <circle cx="10"  cy="9" r="3" fill="var(--circuit-red)"/>
-                <circle cx="58"  cy="9" r="3" fill="var(--circuit-yellow)"/>
-                <circle cx="106" cy="9" r="3" fill="var(--circuit-green)"/>
-                <circle cx="154" cy="9" r="3" fill="var(--circuit-blue)"/>
-                <circle cx="192" cy="9" r="3" fill="var(--circuit-purple)"/>
-              </svg>
-            </span>
-          </span>
-          <p class="tagline">Code it, serve it.</p>
+          <div class="mark mark--primary">
+            <span class="mark__word">FÆBRIQ</span>
+            <svg class="mark__circuit" viewBox="0 0 1832 540" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="FÆBRIQ rainbow circuit trace">
+              <g fill="none" stroke="url(#faeCircuitGrad)" stroke-width="8" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M140 270 H1692"/>
+                <path d="M205 160 L300 270"/>
+                <path d="M205 380 L300 270"/>
+                <path d="M905 270 V300 H940 V392"/>
+                <path d="M1010 270 V320 H1228"/>
+                <path d="M905 252 H1170" stroke-width="5" opacity="0.85"/>
+                <path d="M1627 160 L1532 270"/>
+                <path d="M1627 380 L1532 270"/>
+              </g>
+              <circle cx="140" cy="270" r="21" fill="url(#faeCircuitGrad)"/>
+              <circle cx="1692" cy="270" r="21" fill="url(#faeCircuitGrad)"/>
+              <g fill="#0d0d0d" stroke="url(#faeCircuitGrad)" stroke-width="6">
+                <circle cx="190" cy="150" r="13"/>
+                <circle cx="190" cy="390" r="13"/>
+                <circle cx="940" cy="408" r="13"/>
+                <circle cx="1246" cy="320" r="12"/>
+                <circle cx="1642" cy="150" r="13"/>
+                <circle cx="1642" cy="390" r="13"/>
+              </g>
+            </svg>
+            <p class="mark__tagline">Code It, Serve It.</p>
+          </div>
         </div>
         <figcaption class="lockup__caption"><b>Wordmark</b> · primary</figcaption>
       </figure>
 
-      <!-- Stacked -->
-      <figure class="lockup lockup--stacked">
+      <!-- Stacked / social avatar -->
+      <figure class="lockup">
         <div class="lockup__stage">
-          <span class="wordmark wordmark--stacked">
-            FÆBRIQ
-            <span class="wordmark__trace" aria-hidden="true">
-              <svg viewBox="0 0 200 18" preserveAspectRatio="none">
-                <line x1="4" y1="9" x2="196" y2="9" stroke="url(#trace-gradient)" stroke-width="1" opacity="0.8"/>
-                <circle cx="14"  cy="9" r="2.6" fill="var(--circuit-red)"/>
-                <circle cx="63"  cy="9" r="2.6" fill="var(--circuit-yellow)"/>
-                <circle cx="106" cy="9" r="2.6" fill="var(--circuit-green)"/>
-                <circle cx="148" cy="9" r="2.6" fill="var(--circuit-blue)"/>
-                <circle cx="190" cy="9" r="2.6" fill="var(--circuit-purple)"/>
-              </svg>
-            </span>
-          </span>
-          <p class="tagline tagline--stacked">Serve it.</p>
+          <div class="mark mark--stacked">
+            <span class="mark__word">FÆBRIQ</span>
+            <svg class="mark__circuit" viewBox="0 0 1832 540" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="FÆBRIQ rainbow circuit trace">
+              <g fill="none" stroke="url(#faeCircuitGrad)" stroke-width="8" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M140 270 H1692"/>
+                <path d="M205 160 L300 270"/>
+                <path d="M205 380 L300 270"/>
+                <path d="M905 270 V300 H940 V392"/>
+                <path d="M1010 270 V320 H1228"/>
+                <path d="M905 252 H1170" stroke-width="5" opacity="0.85"/>
+                <path d="M1627 160 L1532 270"/>
+                <path d="M1627 380 L1532 270"/>
+              </g>
+              <circle cx="140" cy="270" r="21" fill="url(#faeCircuitGrad)"/>
+              <circle cx="1692" cy="270" r="21" fill="url(#faeCircuitGrad)"/>
+              <g fill="#0d0d0d" stroke="url(#faeCircuitGrad)" stroke-width="6">
+                <circle cx="190" cy="150" r="13"/>
+                <circle cx="190" cy="390" r="13"/>
+                <circle cx="940" cy="408" r="13"/>
+                <circle cx="1246" cy="320" r="12"/>
+                <circle cx="1642" cy="150" r="13"/>
+                <circle cx="1642" cy="390" r="13"/>
+              </g>
+            </svg>
+            <p class="mark__tagline">Serve It.</p>
+          </div>
         </div>
         <figcaption class="lockup__caption"><b>Stacked</b></figcaption>
       </figure>
 
-      <!-- Æ Monogram -->
-      <figure class="lockup lockup--monogram">
+      <!-- Æ monogram -->
+      <figure class="lockup">
         <div class="lockup__stage">
-          <span class="monogram">Æ</span>
+          <div class="mark mark--monogram">
+            <span class="mark__word">Æ</span>
+            <svg class="mark__circuit" viewBox="0 0 1832 540" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="FÆBRIQ rainbow circuit trace">
+              <g fill="none" stroke="url(#faeCircuitGrad)" stroke-width="8" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M140 270 H1692"/>
+                <path d="M205 160 L300 270"/>
+                <path d="M205 380 L300 270"/>
+                <path d="M905 270 V300 H940 V392"/>
+                <path d="M1010 270 V320 H1228"/>
+                <path d="M905 252 H1170" stroke-width="5" opacity="0.85"/>
+                <path d="M1627 160 L1532 270"/>
+                <path d="M1627 380 L1532 270"/>
+              </g>
+              <circle cx="140" cy="270" r="21" fill="url(#faeCircuitGrad)"/>
+              <circle cx="1692" cy="270" r="21" fill="url(#faeCircuitGrad)"/>
+              <g fill="#0d0d0d" stroke="url(#faeCircuitGrad)" stroke-width="6">
+                <circle cx="190" cy="150" r="13"/>
+                <circle cx="190" cy="390" r="13"/>
+                <circle cx="940" cy="408" r="13"/>
+                <circle cx="1246" cy="320" r="12"/>
+                <circle cx="1642" cy="150" r="13"/>
+                <circle cx="1642" cy="390" r="13"/>
+              </g>
+            </svg>
+          </div>
         </div>
         <figcaption class="lockup__caption"><b>Æ</b><br>monogram</figcaption>
       </figure>
@@ -358,8 +416,8 @@
         <p class="guidance__label">Clear space</p>
         <p class="guidance__body">
           Reserve a minimum margin equal to the cap-height of the
-          <code>Æ</code> on every side of any lockup. Nothing — type,
-          imagery, or the circuit trace of another mark — may enter that zone.
+          <code>Æ</code> on every side of any lockup, including the circuit
+          graphic beneath it. Nothing else may enter that zone.
         </p>
       </div>
       <div class="guidance__cell">
@@ -375,7 +433,7 @@
         <p class="guidance__body">
           Default to off-white <code>#f5f5f5</code> type on the near-black
           ground <code>#0f0e0c</code>. On light or photographic grounds,
-          flip to slate <code>#2f3e46</code> and keep the circuit trace at
+          flip to slate <code>#2f3e46</code> and keep the circuit at
           60–80% opacity so it never competes with the wordmark.
         </p>
       </div>
@@ -385,7 +443,7 @@
       <div class="verdict verdict--do">
         <p class="verdict__tag">Do</p>
         <ul>
-          <li>Keep the circuit trace as a single unbroken underline sitting <em>beneath</em> the wordmark — it is the mark's signature, not a decoration applied after the fact.</li>
+          <li>Place the canonical circuit graphic directly beneath the wordmark, centered, as its own element — never redrawn, recolored, or stretched.</li>
           <li>Pair the wordmark lockup with "Code it, serve it." and the stacked lockup with the shorter "Serve it." cue.</li>
           <li>Use the Æ monogram alone wherever space is tight: favicons, stickers, corner marks on accessories.</li>
         </ul>
@@ -393,7 +451,7 @@
       <div class="verdict verdict--dont">
         <p class="verdict__tag">Don't</p>
         <ul>
-          <li>Recolor the circuit trace to a single brand color, stretch it, or break it into segments — the five-node gradient is fixed.</li>
+          <li>Let the circuit overlap, cross through, or sit behind the letterforms — it reads beneath the mark, not through it.</li>
           <li>Add drop shadows, outlines, or gradients to the Instrument&nbsp;Serif letterforms; let the high-contrast ground do the work.</li>
           <li>Crowd the lockup with secondary lockups, taglines, or imagery inside its clear-space margin.</li>
         </ul>
