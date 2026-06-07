@@ -135,7 +135,7 @@
   }
 
   /* ---------- Wordmark · primary ---------- */
-  .lockup--primary .lockup__stage{ flex-direction:column; gap:18px; }
+  .lockup--primary .lockup__stage{ flex-direction:column; gap:0; }
 
   .wordmark{
     position:relative;
@@ -145,14 +145,15 @@
     letter-spacing:0.06em;
     line-height:1;
     color:var(--paper);
+    margin-bottom:28px;
   }
   .wordmark__trace{
     position:absolute;
     left:-6%;
     right:-6%;
-    top:52%;
-    height:18px;
-    transform:translateY(-50%);
+    top:100%;
+    margin-top:14px;
+    height:14px;
     pointer-events:none;
   }
   .wordmark__trace svg{ display:block; width:100%; height:100%; }
@@ -173,9 +174,9 @@
   }
 
   /* ---------- Stacked ---------- */
-  .lockup--stacked .lockup__stage{ flex-direction:column; gap:8px; }
-  .wordmark--stacked{ font-size:clamp(28px, 4.4vw, 40px); }
-  .wordmark--stacked .wordmark__trace{ height:12px; }
+  .lockup--stacked .lockup__stage{ flex-direction:column; gap:0; }
+  .wordmark--stacked{ font-size:clamp(28px, 4.4vw, 40px); margin-bottom:20px; }
+  .wordmark--stacked .wordmark__trace{ height:10px; margin-top:10px; }
   .tagline--stacked{ letter-spacing:0.36em; font-size:11px; }
 
   /* ---------- Monogram ---------- */
@@ -282,8 +283,8 @@
       <strong>stacked</strong>, and <strong>Æ monogram</strong> — each set in
       Instrument&nbsp;Serif on the near-black ground <code>#0f0e0c</code>. Every
       lockup carries the <strong>pride circuit trace</strong>, a thin five-node
-      gradient line (red → yellow → green → blue → purple) that threads through
-      the mark as the brand's unifying signal.
+      gradient line (red → yellow → green → blue → purple) that runs as an
+      underline beneath the mark — the brand's unifying signal.
     </p>
 
     <hr class="circuit-rule">
@@ -384,7 +385,7 @@
       <div class="verdict verdict--do">
         <p class="verdict__tag">Do</p>
         <ul>
-          <li>Let the circuit trace run <em>through</em> the wordmark as a single unbroken line — it is the mark's signature, not a decoration applied after the fact.</li>
+          <li>Keep the circuit trace as a single unbroken underline sitting <em>beneath</em> the wordmark — it is the mark's signature, not a decoration applied after the fact.</li>
           <li>Pair the wordmark lockup with "Code it, serve it." and the stacked lockup with the shorter "Serve it." cue.</li>
           <li>Use the Æ monogram alone wherever space is tight: favicons, stickers, corner marks on accessories.</li>
         </ul>
